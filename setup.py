@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.1'
+VERSION = '0.1.0'
 DESCRIPTION = 'Python module for interfacing KytePHP'
 LONG_DESCRIPTION = 'Python module for interacting with a KytePHP API'
 

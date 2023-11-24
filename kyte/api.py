@@ -6,7 +6,7 @@ import urllib.parse
 import hashlib
 import hmac
 
-class Kyte:
+class api:
     sessionToken = '0'
     transactionToken = '0'
     username_field = 'email'
