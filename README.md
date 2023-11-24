@@ -10,6 +10,17 @@ You can install the Kyte API Python Library using `pip`:
 pip install kyte
 ```
 
+## Installing on AWS Lambda
+
+To install on AWS Lambda you will need to use layers. Run the following code and make sure the folder you install the modules is called `python`:
+```bash
+mkdir python
+pip install kyte -t python
+zip -r9 kyte_python_layer.zip python
+```
+
+Upload the zip file to your AWS lambda as a new layer. You can find details on how to add a layer to your lambda function [here](https://www.keyq.cloud/en/blog/creating-an-aws-lambda-layer-for-python-requests-module).
+
 ## Usage
 
 ### Initialization
