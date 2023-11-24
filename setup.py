@@ -16,8 +16,10 @@ setup(
         packages=find_packages(),
         install_requires=['os','datetime','requests','json','base64','urllib.parse','hashlib','hmac','logging'],
         url="https://github.com/keyqcloud/kyte-api-python",
+        license="MIT",
         keywords=['python', 'kyte', 'kyte api'],
         classifiers= [
+            "License :: OSI Approved :: MIT License",
             "Programming Language :: Python :: 3",
         ]
 )
