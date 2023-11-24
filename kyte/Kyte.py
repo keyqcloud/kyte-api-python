@@ -7,12 +7,13 @@ import hashlib
 import hmac
 
 class Api:
-    def __init__(self, public_key, private_key, kyte_account, kyte_identifier, kyte_endpoint):
+    def __init__(self, public_key, private_key, kyte_account, kyte_identifier, kyte_endpoint, kyte_app_id = None):
         self.public_key = public_key
         self.private_key = private_key
         self.kyte_account = kyte_account
         self.kyte_identifier = kyte_identifier
         self.kyte_endpoint = kyte_endpoint
+        self.kyte_app_id = kyte_app_id
         self.sessionToken = '0'
         self.transactionToken = '0'
         self.username_field = 'email'
@@ -36,7 +37,7 @@ class Api:
         return hmac.new(key2, epoch.encode("utf-8"), hashlib.sha256).hexdigest()
 
     # make request
-    def request(self, method, model, field = None, value = None, data = None, headers = None):
+    def request(self, method, model, field = None, value = None, data = None, headers = {}):
         date = datetime.now()
         epoch = int(date.timestamp())
         timestamp = datetime.utcfromtimestamp(epoch).strftime('%a, %d %b %Y %H:%M:%S GMT')
@@ -54,6 +55,8 @@ class Api:
             'x-kyte-signature':signature,
             'x-kyte-identity':identity
         }
+        if self.kyte_app_id is not None:
+            _headers.update({'x-kyte-appid': self.kyte_app_id})
         _headers.update(headers)
 
         try:
@@ -72,15 +75,15 @@ class Api:
 
             if r.status_code != 200:
                 if r.status_code == 400:
-                    raise Exception("400 Bad request for {}: {}").format(method, endpoint)
+                    raise Exception("400 Bad request for {}: {}; {}".format(method, endpoint, r.json()))
                 elif r.status_code == 404:
-                    raise Exception("404 Unknown for {}: {}").format(method, endpoint)
+                    raise Exception("404 Unknown for {}: {}; {}".format(method, endpoint, r.json()))
                 elif r.status_code == 403:
-                    raise Exception("403 Access denied for {}: {}").format(method, endpoint)
+                    raise Exception("403 Access denied for {}: {}; {}".format(method, endpoint, r.json()))
                 elif r.status_code >= 500:
-                    raise Exception("{} Server-side error... {}: {}").format(r.status_code, method, endpoint)
+                    raise Exception("{} Server-side error... {}: {}".format(r.status_code, method, endpoint))
                 else:
-                    raise Exception("{} ERROR {}: {}").format(r.status_code, method, endpoint)
+                    raise Exception("{} ERROR {}: {}".format(r.status_code, method, endpoint))
 
         except requests.exceptions.Timeout:
             raise Exception("Connection timed out for {}: {}".format(method, endpoint))
@@ -97,19 +100,19 @@ class Api:
         return r.json()
 
     # make post request
-    def post(self, model, data, headers):
+    def post(self, model, data, headers = {}):
         result = self.request("post", model, None, None, data, headers)
         return result
 
-    def put(self, model, field, value, data, headers):
+    def put(self, model, field, value, data, headers = {}):
         result = self.request("put", model, field, value, data, headers)
         return result
 
-    def get(self, model, field, value, headers):
+    def get(self, model, field = None, value = None, headers = {}):
         result = self.request("get", model, field, value, headers)
         return result
 
-    def delete(self, model, field, value, headers):
+    def delete(self, model, field, value, headers = {}):
         result = self.request("delete", model, field, value, headers)
         return result
 
