@@ -26,7 +26,6 @@ setup(
             "Intended Audience :: Developers",
             "Operating System :: OS Independent",
             "Topic :: Internet :: WWW/HTTP",
-            "Topic :: Software Development :: Libraries :: Tools",
             "Topic :: Software Development :: Libraries :: Python Modules",
         ]
 )
