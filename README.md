@@ -135,7 +135,36 @@ The installable wheel will be generated within the `dist/` directory, and a sepa
 
 ## Publishing on PyPI
 
+Install twine if not already available:
+```python
+pip install twine
+```
 
+### Uploading to testpypi
+
+Before making the package available publicly, it is best to test the upload and install using testpypi. To upload to testpypi, run
+```python
+twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+```
+
+You can alternatively specify the source distribution instead of uploading all generated distributions in the `dist/` directory.
+
+To test install from testpypi, run:
+```python
+pip install --index-url https://test.pypi.org/simple/ kyte --user
+```
+
+### Uploading to PyPI
+
+Once you've completed the test above, you can upload the package to PyPI using:
+```python
+twine upload dist/*
+```
+
+And test the install using:
+```python
+pip install kyte --user
+```
 
 ## Contributing
 
