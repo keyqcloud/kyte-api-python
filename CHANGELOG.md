@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Fix issue where kyte package was being excluded
+
 ## 0.1.0
 
 * Update class name
