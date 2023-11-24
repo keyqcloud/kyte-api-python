@@ -23,5 +23,10 @@ setup(
         classifiers= [
             "License :: OSI Approved :: MIT License",
             "Programming Language :: Python :: 3",
+            "Intended Audience :: Developers",
+            "Operating System :: OS Independent",
+            "Topic :: Internet :: WWW/HTTP",
+            "Topic :: Software Development :: Libraries :: Tools",
+            "Topic :: Software Development :: Libraries :: Python Modules",
         ]
 )
