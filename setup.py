@@ -2,9 +2,7 @@ from setuptools import setup, find_packages
 
 VERSION = '0.1.0'
 DESCRIPTION = 'Python module for interfacing Kyte API'
-
-with open("README.md") as file:
-    long_description = file.read()
+LONG_DESCRIPTION = 'The Kyte API Python Library is designed to facilitate communication between a Python client and the Kyte API endpoint. It simplifies the process of authentication, request signing, and making API calls.'
 
 # Setting up
 setup(
@@ -14,7 +12,7 @@ setup(
         author="Kenneth P. Hough",
         author_email="<kenneth@keyqcloud.com>",
         description=DESCRIPTION,
-        long_description=long_description,
+        long_description=LONG_DESCRIPTION,
         packages=find_packages(include=['mypythonlib']),
         install_requires=['requests'],
         url="https://github.com/keyqcloud/kyte-api-python",
