@@ -6,18 +6,17 @@ import urllib.parse
 import hashlib
 import hmac
 
-class api:
-    sessionToken = '0'
-    transactionToken = '0'
-    username_field = 'email'
-    password_field = 'password'
-
+class Api:
     def __init__(self, public_key, private_key, kyte_account, kyte_identifier, kyte_endpoint):
         self.public_key = public_key
         self.private_key = private_key
         self.kyte_account = kyte_account
         self.kyte_identifier = kyte_identifier
         self.kyte_endpoint = kyte_endpoint
+        self.sessionToken = '0'
+        self.transactionToken = '0'
+        self.username_field = 'email'
+        self.password_field = 'password'
 
     # create identity string
     def getIdentity(self, timestamp):
