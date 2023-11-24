@@ -1,8 +1,10 @@
 from setuptools import setup, find_packages
 
 VERSION = '0.1.0'
-DESCRIPTION = 'Python module for interfacing KytePHP'
-LONG_DESCRIPTION = 'Python module for interacting with a KytePHP API'
+DESCRIPTION = 'Python module for interfacing Kyte API'
+
+with open("README.md") as file:
+    long_description = file.read()
 
 # Setting up
 setup(
@@ -12,9 +14,9 @@ setup(
         author="Kenneth P. Hough",
         author_email="<kenneth@keyqcloud.com>",
         description=DESCRIPTION,
-        long_description=LONG_DESCRIPTION,
-        packages=find_packages(),
-        install_requires=['datetime','requests','hmac'],
+        long_description=long_description,
+        packages=find_packages(include=['mypythonlib']),
+        install_requires=['requests'],
         url="https://github.com/keyqcloud/kyte-api-python",
         license="MIT",
         keywords=['python', 'kyte', 'kyte api'],
