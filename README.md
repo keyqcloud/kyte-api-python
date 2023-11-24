@@ -14,11 +14,13 @@ pip install kyte
 
 ### Initialization
 
+To initialize, import Kyte from the kyte module and call Api(). For application, you can supply an optional kyte_app_id to connect to the application that is hosted on Kyte.
+
 ```python
-from kyte import api
+from kyte import Kyte
 
 # Initialize the Kyte API client
-client = api(public_key, private_key, kyte_account, kyte_identifier, kyte_endpoint)
+client = Kyte.Api(public_key, private_key, kyte_account, kyte_identifier, kyte_endpoint, kyte_app_id)
 ```
 
 ### Making Requests
