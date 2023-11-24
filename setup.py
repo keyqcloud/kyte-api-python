@@ -14,7 +14,7 @@ setup(
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         packages=find_packages(),
-        install_requires=['os','datetime','requests','json','base64','urllib.parse','hashlib','hmac','logging'],
+        install_requires=['datetime','requests','hmac'],
         url="https://github.com/keyqcloud/kyte-api-python",
         license="MIT",
         keywords=['python', 'kyte', 'kyte api'],
