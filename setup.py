@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 DESCRIPTION = 'Python module for interfacing Kyte API'
 LONG_DESCRIPTION = 'The Kyte API Python Library is designed to facilitate communication between a Python client and the Kyte API endpoint. It simplifies the process of authentication, request signing, and making API calls.'
 
@@ -14,7 +14,7 @@ setup(
         description=DESCRIPTION,
         long_description=LONG_DESCRIPTION,
         packages=find_packages(include=['kyte']),
-        install_requires=['requests'],
+        install_requires=['urllib3<2','requests'],
         url="https://github.com/keyqcloud/kyte-api-python",
         license="MIT",
         keywords=['python', 'kyte', 'kyte api'],

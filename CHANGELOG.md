@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Specify urllib3<2 to work with boto3
+
 ## 0.1.1
 
 * Fix issue where kyte package was being excluded
