@@ -1,3 +1,7 @@
+## 0.2.0
+
+* Add DBI support for mysql, useful for lambda layers
+
 ## 0.1.2
 
 * Specify urllib3<2 to work with boto3
