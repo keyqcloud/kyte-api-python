@@ -45,9 +45,9 @@ class MySql:
         # Close the connection
         conn.close()
 
-    def mysql_get(body):
+    def mysql_get(self, body):
         # Connect to the database
-        conn = pymysql.connect(host=os.environ['DB_HOST'], user=os.environ['DB_USER'], password=os.environ['DB_PASSWORD'], database=body['database'])
+        conn = pymysql.connect(host=self.db_host, user=self.db_user, password=self.db_password, database=self.db_name)
         # Create a cursor object
         cursor = conn.cursor()
         # Execute the SQL query
@@ -69,20 +69,4 @@ class MySql:
         # Close the connection
         conn.close()
 
-        result = json.dumps(result_dicts)
-        # bz compress result
-        result = bz2.compress(result.encode("utf-8"))
-        # Check if the compressed data is within 250 KB (250 * 1024 bytes)
-        if len(result) > 250 * 1024:
-            # Send the compressed data to SQS
-            sqs = boto3.client('sqs')
-            sqs.send_message(QueueUrl = os.environ['data_ingestion_queue'], MessageGroupId=body['site_id'], MessageBody = body)
-            return  {
-                'statusCode': 200,
-                'body': 'successfully retrieved entry for '+body['model']+' table'
-            }
-        else:
-            return  {
-                'statusCode': 400,
-                'body': 'Result too big for sqs message'
-            }
+        return result_dicts
