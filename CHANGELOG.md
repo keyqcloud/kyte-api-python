@@ -1,3 +1,8 @@
+## 0.2.1
+
+* remove "mysql_" prefix from functions for DBI.MySql
+* Refactor database code
+
 ## 0.2.0
 
 * Add DBI support for mysql, useful for lambda layers
