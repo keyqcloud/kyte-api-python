@@ -1,3 +1,7 @@
+## 0.2.2
+
+* Update to use json and send json data instead of string via requests
+
 ## 0.2.1
 
 * remove "mysql_" prefix from functions for DBI.MySql

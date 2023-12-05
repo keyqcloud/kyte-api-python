@@ -63,9 +63,9 @@ class Api:
             # execute request based on method
             if method == "post":
                 # post request
-                r = requests.post(endpoint, json=json.dumps(data), headers=_headers)
+                r = requests.post(endpoint, json=data, headers=_headers)
             elif method == "put":
-                r = requests.put(endpoint, json=json.dumps(data), headers=_headers)
+                r = requests.put(endpoint, json=data, headers=_headers)
             elif method == "get":
                 r = requests.get(endpoint, headers=_headers)
             elif method == "delete":
