@@ -1,0 +1,46 @@
+name: Deploy to CDN
+
+on:  
+  push:
+    tags:
+      - '*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-stable
+
+    steps:
+    - name: Check out source code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Extract tag name
+      run: echo "TAG_NAME=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+    - name: Install Kyte Python modules
+      run: |
+        mkdir python
+        pip install --upgrade pip
+        pip install kyte -t python
+        zip -r9 kyte_python_layer.zip python
+
+    - name: Copy stable files to S3
+      run: aws s3 cp kyte_python_layer.zip s3://${{ secrets.S3_BUCKET }}/lambda/layers/latest/kyte_python_layer.zip
+
+    - name: Sync archive files to S3
+      run: aws s3 cp kyte_python_layer.zip s3://${{ secrets.S3_BUCKET }}/lambda/jlayerss/archive/kyte_python_layer-${{ env.TAG_NAME }}.zip
+
+    - name: Invalidate CloudFront cache for latest files
+      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DISTRIBUTION_ID }} --paths '/*'
+
