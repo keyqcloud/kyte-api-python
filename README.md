@@ -1,6 +1,6 @@
 # Kyte API Python Library
 
-[![CodeQL](https://github.com/keyqcloud/kyte-api-python/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/keyqcloud/kyte-api-python/actions/workflows/codeql-analysis.yml)
+[![CodeQL](https://github.com/keyqcloud/kyte-api-python/actions/workflows/codeql.yml/badge.svg)](https://github.com/keyqcloud/kyte-api-python/actions/workflows/codeql.yml)
 
 The Kyte API Python Library is designed to facilitate communication between a Python client and the Kyte API endpoint. It simplifies the process of authentication, request signing, and making API calls.
 
