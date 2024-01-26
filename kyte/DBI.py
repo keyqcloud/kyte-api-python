@@ -17,7 +17,7 @@ class MySql:
             # Creating the SQL query string for insertion
             columns = ', '.join(body['data'].keys())
             placeholders = ', '.join(['%s'] * len(body['data']))
-            queryStr = f"INSERT INTO {body['model']} ({columns}) VALUES ({placeholders})"
+            queryStr = f"INSERT INTO `{body['model']}` ({columns}) VALUES ({placeholders})"
             # Execute the SQL query
             with conn.cursor() as cursor:
                 cursor.execute(queryStr, list(body['data'].values()))
@@ -36,7 +36,7 @@ class MySql:
             # Generating the SET part of the query
             set_values = ', '.join([f"{key} = %s" for key in body['data']])
             # Creating the SQL query string
-            queryStr = f"UPDATE {body['model']} SET {set_values} WHERE `{body['field']}` = %s"
+            queryStr = f"UPDATE `{body['model']}` SET {set_values} WHERE `{body['field']}` = %s"
             # Combining data values for SET and WHERE clause
             query_values = list(body['data'].values()) + [body['value']]
             # Create a cursor object
@@ -56,7 +56,7 @@ class MySql:
 
         try:
             # Creating the SQL query string for deletion
-            queryStr = f"DELETE FROM {body['model']} WHERE `{body['field']}` = %s"
+            queryStr = f"DELETE FROM `{body['model']}` WHERE `{body['field']}` = %s"
             # Execute the SQL query
             with conn.cursor() as cursor:
                 cursor.execute(queryStr, [body['value']])
@@ -76,11 +76,11 @@ class MySql:
             with conn.cursor() as cursor:
                 if 'field' in body and 'value' in body and body['field'] and body['value']:
                     # Constructing SQL query with WHERE clause
-                    queryStr = f"SELECT * FROM {body['model']} WHERE `{body['field']}` = %s"
+                    queryStr = f"SELECT * FROM `{body['model']}` WHERE `{body['field']}` = %s"
                     cursor.execute(queryStr, [body['value']])
                 else:
                     # If no specific field and value provided, fetch all records
-                    cursor.execute(f"SELECT * FROM {body['model']}")
+                    cursor.execute(f"SELECT * FROM `{body['model']}`")
 
                 # Fetch all rows
                 rows = cursor.fetchall()

@@ -1,3 +1,7 @@
+## 0.2.3
+
+* Add back ticks to table name to prevent collision of tables names that are the same as SQL directives.
+
 ## 0.2.2
 
 * Update to use json and send json data instead of string via requests
